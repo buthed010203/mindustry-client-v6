@@ -21,8 +21,15 @@ buildscript{
         classpath "com.github.anuken:packr:-SNAPSHOT"
         classpath "com.github.Anuken.Arc:packer:$arcHash"
         classpath "com.github.Anuken.Arc:arc-core:$arcHash"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0"
     }
 }
+
+//plugins{
+////    id 'org.jetbrains.kotlin:kotlin-stdlib-jdk8' version '1.4.10'
+////    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+//}
 
 allprojects{
     apply plugin: 'maven'
@@ -197,6 +204,7 @@ project(":desktop"){
     apply plugin: "java"
 
     compileJava.options.fork = true
+//    compileKotlin.options.fork = true
 
     dependencies{
         implementation project(":core")
@@ -248,6 +256,7 @@ project(":ios"){
 
 project(":core"){
     apply plugin: "java-library"
+    apply plugin: "kotlin"
 
     task preGen{
         outputs.upToDateWhen{ false }
@@ -256,6 +265,22 @@ project(":core"){
         writeProcessors()
         writePlugins()
     }
+
+//    compileKotlin{
+//        kotlinOptions{
+//            jvmTarget = "1.8"
+//        }
+//        apply plugin: "kotlin"
+//    }
+
+//    compileJava{
+//        apply plugin: "kotlin"
+//    }
+//    compileTestKotlin{
+//        kotlinOptions{
+//            jvmTarget = "1.8"
+//        }
+//    }
 
     task copyChangelog{
         doLast{
@@ -277,6 +302,7 @@ project(":core"){
     }
 
     dependencies{
+        compileKotlin.dependsOn(preGen)
         compileJava.dependsOn(preGen)
 
         api "org.lz4:lz4-java:1.4.1"
@@ -287,6 +313,8 @@ project(":core"){
         api arcModule("extensions:fx")
         api arcModule("extensions:arcnet")
         api "com.github.Anuken:rhino:$rhinoVersion"
+//        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        compile "org.jetbrains.kotlin:kotlin-stdlib:1.4.0"
         if(localArc() && debugged()) api arcModule("extensions:recorder")
 
         compileOnly project(":annotations")
