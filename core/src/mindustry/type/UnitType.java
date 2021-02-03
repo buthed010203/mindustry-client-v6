@@ -197,7 +197,7 @@ public class UnitType extends UnlockableContent{
             table.row();
             table.add(Blocks.microProcessor.emoji() + " " + Core.bundle.get("units.processorcontrol") + " " ).growX().left();
             table.row();
-            table.label(() -> Iconc.settings + " " + (long)unit.flag + " (" + p.controller.tileX() + ", " + p.controller.tileY() + ")").color(Color.lightGray).wrap().left();
+            table.label(() -> Iconc.settings + " " + (long)unit.flag + " (" + (p.controller != null ? p.controller.tileX() : 0) + ", " + (p.controller != null ? p.controller.tileY() : 0) + ")").color(Color.lightGray).wrap().left();
         }
         
         table.row();

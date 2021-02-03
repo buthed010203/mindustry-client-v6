@@ -366,6 +366,7 @@ public class Fx{
     }),
 
     hitBulletSmall = new Effect(14, e -> {
+        if (UnitType.alpha == 0) return;
         color(Color.white, Pal.lightOrange, e.fin());
 
         e.scaled(7f, s -> {
@@ -815,20 +816,22 @@ public class Fx{
     }),
 
     wet = new Effect(80f, e -> {
+        if (e.color.a == 0) return;
         color(Liquids.water.color);
-        alpha(Mathf.clamp(e.fin() * 2f));
+        alpha(Mathf.clamp(e.fin() * 2f * e.color.a));
 
         Fill.circle(e.x, e.y, e.fout());
     }),
 
     muddy = new Effect(80f, e -> {
         color(Color.valueOf("432722"));
-        alpha(Mathf.clamp(e.fin() * 2f));
+        alpha(Mathf.clamp(e.fin() * 2f * e.color.a));
 
         Fill.circle(e.x, e.y, e.fout());
     }),
 
     sapped = new Effect(40f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.sap);
 
         randLenVectors(e.id, 2, 1f + e.fin() * 2f, (x, y) -> {
@@ -837,6 +840,7 @@ public class Fx{
     }),
 
     sporeSlowed = new Effect(40f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.spore);
 
         Fill.circle(e.x, e.y, e.fslope() * 1.1f);
@@ -859,6 +863,7 @@ public class Fx{
     }),
 
     overclocked = new Effect(50f, e -> {
+        if (e.color.a == 0) return;
         color(Pal.accent);
         alpha(e.color.a);
 
@@ -977,6 +982,7 @@ public class Fx{
     }),
 
     shootSmall = new Effect(8, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lighterOrange, Pal.lightOrange, e.fin());
         float w = 1f + 5 * e.fout();
         Drawf.tri(e.x, e.y, w, 15f * e.fout(), e.rotation);
@@ -984,6 +990,7 @@ public class Fx{
     }),
 
     shootHeal = new Effect(8, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.heal);
         float w = 1f + 5 * e.fout();
         Drawf.tri(e.x, e.y, w, 17f * e.fout(), e.rotation);
@@ -998,6 +1005,7 @@ public class Fx{
     }),
 
     shootSmallSmoke = new Effect(20f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lighterOrange, Color.lightGray, Color.gray, e.fin());
 
         randLenVectors(e.id, 5, e.finpow() * 6f, e.rotation, 20f, (x, y) -> {
@@ -1006,6 +1014,7 @@ public class Fx{
     }),
 
     shootBig = new Effect(9, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lighterOrange, Pal.lightOrange, e.fin());
         float w = 1.2f + 7 * e.fout();
         Drawf.tri(e.x, e.y, w, 25f * e.fout(), e.rotation);
@@ -1013,6 +1022,7 @@ public class Fx{
     }),
 
     shootBig2 = new Effect(10, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Color.gray, e.fin());
         float w = 1.2f + 8 * e.fout();
         Drawf.tri(e.x, e.y, w, 29f * e.fout(), e.rotation);
@@ -1020,6 +1030,7 @@ public class Fx{
     }),
 
     shootBigSmoke = new Effect(17f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lighterOrange, Color.lightGray, Color.gray, e.fin());
 
         randLenVectors(e.id, 8, e.finpow() * 19f, e.rotation, 10f, (x, y) -> {
@@ -1028,6 +1039,7 @@ public class Fx{
     }),
 
     shootBigSmoke2 = new Effect(18f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Color.lightGray, Color.gray, e.fin());
 
         randLenVectors(e.id, 9, e.finpow() * 23f, e.rotation, 20f, (x, y) -> {
@@ -1036,6 +1048,7 @@ public class Fx{
     }),
 
     shootSmallFlame = new Effect(32f, 80f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightFlame, Pal.darkFlame, Color.gray, e.fin());
 
         randLenVectors(e.id, 8, e.finpow() * 60f, e.rotation, 10f, (x, y) -> {
@@ -1044,6 +1057,7 @@ public class Fx{
     }),
 
     shootPyraFlame = new Effect(33f, 80f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightPyraFlame, Pal.darkPyraFlame, Color.gray, e.fin());
 
         randLenVectors(e.id, 10, e.finpow() * 70f, e.rotation, 10f, (x, y) -> {
@@ -1052,6 +1066,7 @@ public class Fx{
     }),
 
     shootLiquid = new Effect(40f, 80f, e -> {
+        if (UnitType.alpha == 0) return;
         color(e.color, Color.white, e.fout() / 6f + Mathf.randomSeedRange(e.id, 0.1f));
 
         randLenVectors(e.id, 6, e.finpow() * 60f, e.rotation, 11f, (x, y) -> {
@@ -1060,6 +1075,7 @@ public class Fx{
     }),
 
     casing1 = new Effect(30f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Color.lightGray, Pal.lightishGray, e.fin());
         alpha(e.fout(0.3f));
         float rot = Math.abs(e.rotation) + 90f;
@@ -1076,6 +1092,7 @@ public class Fx{
     }).layer(Layer.bullet),
 
     casing2 = new Effect(34f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Color.lightGray, Pal.lightishGray, e.fin());
         alpha(e.fout(0.5f));
         float rot = Math.abs(e.rotation) + 90f;
@@ -1090,6 +1107,7 @@ public class Fx{
     }).layer(Layer.bullet),
 
     casing3 = new Effect(40f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Pal.lightishGray, Pal.lightishGray, e.fin());
         alpha(e.fout(0.5f));
         float rot = Math.abs(e.rotation) + 90f;
@@ -1106,6 +1124,7 @@ public class Fx{
     }).layer(Layer.bullet),
 
     casing4 = new Effect(45f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Pal.lightishGray, Pal.lightishGray, e.fin());
         alpha(e.fout(0.5f));
         float rot = Math.abs(e.rotation) + 90f;
@@ -1138,6 +1157,7 @@ public class Fx{
     }).layer(Layer.bullet),
 
     casing3Double = new Effect(40f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lightOrange, Pal.lightishGray, Pal.lightishGray, e.fin());
         alpha(e.fout(0.5f));
         float rot = Math.abs(e.rotation) + 90f;
@@ -1157,6 +1177,7 @@ public class Fx{
     }).layer(Layer.bullet),
 
     railShoot = new Effect(24f, e -> {
+        if (UnitType.alpha == 0) return;
         e.scaled(10f, b -> {
             color(Color.white, Color.lightGray, b.fin());
             stroke(b.fout() * 3f + 0.2f);
@@ -1171,6 +1192,7 @@ public class Fx{
     }),
 
     railTrail = new Effect(16f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.orangeSpark);
 
         for(int i : Mathf.signs){
@@ -1179,6 +1201,7 @@ public class Fx{
     }),
 
     railHit = new Effect(18f, 200f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.orangeSpark);
 
         for(int i : Mathf.signs){
@@ -1187,6 +1210,7 @@ public class Fx{
     }),
 
     lancerLaserShoot = new Effect(21f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lancerLaser);
 
         for(int i : Mathf.signs){
@@ -1195,6 +1219,7 @@ public class Fx{
     }),
 
     lancerLaserShootSmoke = new Effect(26f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Color.white);
         float length = !(e.data instanceof Float) ? 70f : (Float)e.data;
 
@@ -1204,6 +1229,7 @@ public class Fx{
     }),
 
     lancerLaserCharge = new Effect(38f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lancerLaser);
 
         randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 120f, (x, y) -> {
@@ -1212,6 +1238,7 @@ public class Fx{
     }),
 
     lancerLaserChargeBegin = new Effect(60f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lancerLaser);
         Fill.circle(e.x, e.y, e.fin() * 3f);
 
@@ -1220,6 +1247,7 @@ public class Fx{
     }),
 
     lightningCharge = new Effect(38f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Pal.lancerLaser);
 
         randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 120f, (x, y) -> {
@@ -1228,6 +1256,7 @@ public class Fx{
     }),
 
     sparkShoot = new Effect(12f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Color.white, e.color, e.fin());
         stroke(e.fout() * 1.2f + 0.6f);
 
@@ -1237,6 +1266,7 @@ public class Fx{
     }),
 
     lightningShoot = new Effect(12f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Color.white, Pal.lancerLaser, e.fin());
         stroke(e.fout() * 1.2f + 0.5f);
 
@@ -1246,6 +1276,7 @@ public class Fx{
     }),
 
     thoriumShoot = new Effect(12f, e -> {
+        if (UnitType.alpha == 0) return;
         color(Color.white, Pal.thoriumPink, e.fin());
         stroke(e.fout() * 1.2f + 0.5f);
 

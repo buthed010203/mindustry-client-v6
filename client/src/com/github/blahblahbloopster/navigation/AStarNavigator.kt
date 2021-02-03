@@ -2,7 +2,6 @@ package com.github.blahblahbloopster.navigation
 
 import arc.math.Mathf
 import arc.math.geom.*
-import arc.util.Log
 import mindustry.Vars.*
 import mindustry.client.navigation.Navigator
 import mindustry.core.World
@@ -124,7 +123,6 @@ object AStarNavigator : Navigator() {
 
         val tileWidth = ceil(width / tilesize).toInt() + 1
         val tileHeight = ceil(height / tilesize).toInt() + 1
-        Log.info("$tileWidth   $width")
 
         start.clamp(0f, 0f, height, width)
         end.clamp(0f, 0f, height, width)
