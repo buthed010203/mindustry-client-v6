@@ -27,7 +27,7 @@ public class RepairPath extends Path {
 
     @Override
     float progress() {
-        if (player.unit() != null && (!player.unit().type.canHeal || indexer.getDamaged(player.team()).isEmpty())) {
+        if (player.unit() != null && (player.unit().type != null && !player.unit().type.canHeal || indexer.getDamaged(player.team()).isEmpty())) {
             player.shooting(false);
             return 1;
         }

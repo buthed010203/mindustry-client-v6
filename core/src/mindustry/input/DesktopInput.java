@@ -96,6 +96,14 @@ public class DesktopInput extends InputHandler{
                 b.label(() -> Core.bundle.format("stoppath", Core.keybinds.get(Binding.stop_following_path).key.toString())).style(Styles.outlineLabel);
             }).margin(6f);
         });
+        group.fill(t -> {
+            t.visible(() -> Core.settings.getBool("hints") && ui.hudfrag.shown && Navigation.state == NavigationState.THINKING && UnitType.alpha != 0);
+            t.bottom();
+            t.table(Styles.black6, b -> {
+                b.defaults().left();
+                b.label(() -> Core.bundle.format("stopthinking", Core.keybinds.get(Binding.stop_following_path).key.toString())).style(Styles.outlineLabel);
+            }).margin(6f);
+        });
 
         group.fill(t -> {
             t.bottom();

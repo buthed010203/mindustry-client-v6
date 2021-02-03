@@ -787,6 +787,7 @@ public class Blocks implements ContentList{
             health = 130 * wallHealthMultiplier;
             insulated = true;
             absorbLasers = true;
+            schematicPriority = 10;
         }};
 
         plastaniumWallLarge = new Wall("plastanium-wall-large"){{
@@ -1662,6 +1663,7 @@ public class Blocks implements ContentList{
             shootEffect = Fx.shootLiquid;
             range = 190f;
             health = 250 * size * size;
+            flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
         }};
 
         fuse = new ItemTurret("fuse"){{

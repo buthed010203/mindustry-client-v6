@@ -11,6 +11,7 @@ import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import arc.struct.*;
 import arc.util.*;
+import mindustry.*;
 import mindustry.ai.types.*;
 import mindustry.annotations.Annotations.*;
 import mindustry.client.Client;
@@ -294,10 +295,15 @@ public class UnitType extends UnlockableContent{
 
         if(maxRange < 0){
             maxRange = 0f;
+            maxRange = Math.max(maxRange, range);
 
             for(Weapon weapon : weapons){
                 maxRange = Math.max(maxRange, weapon.bullet.range() + hitSize / 2f);
             }
+        }
+
+        if(weapons.isEmpty()){
+            range = maxRange = miningRange;
         }
 
         if(mechStride < 0){
@@ -425,6 +431,7 @@ public class UnitType extends UnlockableContent{
     public void draw(Unit unit){
         Mechc mech = unit instanceof Mechc ? (Mechc)unit : null;
         alpha = Client.hideUnits ? 0 : (unit.controller() instanceof FormationAI || unit.playerNonNull().assisting && !unit.isLocal()) ? .3f : 1;
+        if (alpha == 0) return;
         float z = unit.elevation > 0.5f ? (lowAltitude ? Layer.flyingUnitLow : Layer.flyingUnit) : groundLayer + Mathf.clamp(hitSize / 4000f, 0, 0.01f);
 
         if(unit.controller().isBeingControlled(player.unit())){
